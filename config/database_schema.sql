@@ -1,8 +1,6 @@
--- Criação do banco de dados
 CREATE DATABASE IF NOT EXISTS recrutamento_api;
 USE recrutamento_api;
 
--- Tabela de vagas
 CREATE TABLE IF NOT EXISTS vagas (
     id VARCHAR(36) PRIMARY KEY,
     empresa VARCHAR(255) NOT NULL,
@@ -13,7 +11,6 @@ CREATE TABLE IF NOT EXISTS vagas (
     CHECK (nivel >= 1 AND nivel <= 5)
 );
 
--- Tabela de pessoas
 CREATE TABLE IF NOT EXISTS pessoas (
     id VARCHAR(36) PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -23,7 +20,6 @@ CREATE TABLE IF NOT EXISTS pessoas (
     CHECK (nivel >= 1 AND nivel <= 5)
 );
 
--- Tabela de candidaturas
 CREATE TABLE IF NOT EXISTS candidaturas (
     id VARCHAR(36) PRIMARY KEY,
     id_vaga VARCHAR(36) NOT NULL,
@@ -34,7 +30,6 @@ CREATE TABLE IF NOT EXISTS candidaturas (
     UNIQUE (id_vaga, id_pessoa)
 );
 
--- Tabela de distâncias entre localidades
 CREATE TABLE IF NOT EXISTS distancias (
     origem CHAR(1) NOT NULL,
     destino CHAR(1) NOT NULL,
@@ -42,33 +37,31 @@ CREATE TABLE IF NOT EXISTS distancias (
     PRIMARY KEY (origem, destino)
 );
 
--- Inserção das distâncias conforme o mapa
--- Nota: Precisamos de informações sobre o mapa de distâncias para preencher esta tabela
--- Por enquanto, vamos inserir alguns exemplos fictícios
+
 INSERT INTO distancias (origem, destino, distancia) VALUES
+-- Distâncias de A
 ('A', 'B', 5),
-('A', 'C', 10),
-('B', 'C', 8),
-('B', 'D', 12),
-('C', 'D', 6),
-('C', 'E', 15),
-('D', 'E', 7);
-
--- Inserir também as distâncias no sentido inverso
-INSERT INTO distancias (origem, destino, distancia) VALUES
+-- Distâncias de B
 ('B', 'A', 5),
-('C', 'A', 10),
-('C', 'B', 8),
-('D', 'B', 12),
-('D', 'C', 6),
-('E', 'C', 15),
-('E', 'D', 7);
+('B', 'C', 7),
+('B', 'D', 3),
+-- Distâncias de C
+('C', 'B', 7),
+('C', 'E', 4),
+-- Distâncias de D
+('D', 'B', 3),
+('D', 'E', 10),
+('D', 'F', 8),
+-- Distâncias de E
+('E', 'C', 4),
+('E', 'D', 10),
+-- Distâncias de F
+('F', 'D', 8);
 
--- Inserir distância zero para mesma localidade
 INSERT INTO distancias (origem, destino, distancia) VALUES
 ('A', 'A', 0),
 ('B', 'B', 0),
 ('C', 'C', 0),
 ('D', 'D', 0),
-('E', 'E', 0);
-
+('E', 'E', 0),
+('F', 'F', 0);
