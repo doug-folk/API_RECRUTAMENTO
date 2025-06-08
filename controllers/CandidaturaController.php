@@ -25,7 +25,6 @@ class CandidaturaController {
         try {
             $jsonData = file_get_contents('php://input');
             
-            // Valida o JSON
             $data = Validator::validateJson($jsonData);
             if ($data === null) {
                 jsonResponse(null, HTTP_BAD_REQUEST);
