@@ -38,10 +38,8 @@ if (count($segments) > 0) {
             $controller = new VagaController();
             
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($segments) === 1) {
-                // POST /vagas
                 $controller->create();
-            } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && count($segments) === 3 && $segments[2] === 'candidaturas' && isset($segments[3]) && $segments[3] === 'ranking') {
-                // GET /vagas/{id}/candidaturas/ranking
+            } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && count($segments) === 4 && $segments[2] === 'candidaturas' && isset($segments[3]) && $segments[3] === 'ranking') {
                 $controller->getRanking($segments[1]);
             } else {
                 jsonResponse(['error' => 'Rota não encontrada'], HTTP_NOT_FOUND);
@@ -53,7 +51,6 @@ if (count($segments) > 0) {
             $controller = new PessoaController();
             
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($segments) === 1) {
-                // POST /pessoas
                 $controller->create();
             } else {
                 jsonResponse(['error' => 'Rota não encontrada'], HTTP_NOT_FOUND);
@@ -65,7 +62,6 @@ if (count($segments) > 0) {
             $controller = new CandidaturaController();
             
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($segments) === 1) {
-                // POST /candidaturas
                 $controller->create();
             } else {
                 jsonResponse(['error' => 'Rota não encontrada'], HTTP_NOT_FOUND);

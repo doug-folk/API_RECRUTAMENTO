@@ -54,6 +54,10 @@ class VagaController {
 
             $candidatos = $this->vagaDAO->getCandidatosRanking($id);
 
+            if (empty($candidatos)) {
+            jsonResponse(null, HTTP_NOT_FOUND);
+            }
+
             $response = [
                 'candidaturas' => []
             ];
